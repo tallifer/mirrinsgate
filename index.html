@@ -3,11 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Site</title>
+  <title>Mirrin's Gate</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: 'Georgia', serif;
+      overflow: hidden;
+      background: black;
+    }
+
+    .landing-container {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+
+    .landing-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1);
+      animation: slowZoom 35s ease forwards;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.25);
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 3s ease-in-out forwards;
+      animation-delay: 1.5s;
+    }
+
+    .overlay h1 {
+      color: #fff8e6;
+      font-size: 4rem;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+    }
+
+    .overlay button {
+      font-size: 1.5rem;
+      padding: 15px 40px;
+      background: #b28c5b;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: background 0.3s ease, transform 0.3s ease;
+      transform: scale(0.9);
+    }
+
+    .overlay button:hover {
+      background: #9b764a;
+      transform: scale(1.05);
+    }
+
+    /* Black overlay for page transitions */
+    .fade-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      pointer-events: none;
+      opacity: 1;
+      animation: fadeOut 1s ease-in-out forwards;
+    }
+
+    .fade-to-black {
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes slowZoom {
+      to { transform: scale(1.1); }
+    }
+  </style>
 </head>
 <body>
-  <h1>Netlify Test Successful!</h1>
-  <p>If you see this, your domain is working.</p>
+  <div class="landing-container">
+    <img src="images/landing.png" alt="Mirrin's Gate Landing">
+    <div class="overlay">
+      <h1>Welcome to Mirrin's Gate</h1>
+      <button onclick="fadeToTown()">Enter the Town</button>
+    </div>
+  </div>
+
+  <!-- Black overlay for page transitions -->
+  <div class="fade-overlay" id="fadeOverlay"></div>
+
+  <script>
+    function fadeToTown() {
+      const overlay = document.getElementById('fadeOverlay');
+      overlay.classList.add('fade-to-black');
+      setTimeout(() => {
+        window.location.href = 'town.html';
+      }, 1000); // Matches fade duration
+    }
+  </script>
 </body>
 </html>
-

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirrin's Gate</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Fade from black overlay */
+    .fade-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 9999;
+      animation: fadeOut 0.5s ease-in-out forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    body {
+      margin: 0; /* ensure header aligns correctly */
+    }
+
+    #borderWrapper {
+      margin-top: 80px; /* adjust for header height */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Black overlay for fade-in -->
+  <div class="fade-overlay"></div>
+
+  <!-- Shared Header -->
+  <header id="siteHeader">
+    <h1>Mirrin's Gate</h1>
+    <a href="index.html" class="back-button">← Back to Landing</a>
+    <a href="journal.html" class="back-button" style="left: auto; right: 20px;">📜 Journal</a>
+  </header>
+
+  <div id="borderWrapper">
+    <img id="mapBorder" src="images/border.png" alt="Map Border">
+
+    <div id="game">
+      <img id="scene" src="images/street.png" alt="scene">
+      <div id="hotspots"></div>
+
+      <div id="dialogueBox" class="hidden">
+        <span id="closeDialogue">✖</span>
+        <p id="dialogueText"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
