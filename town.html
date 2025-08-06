@@ -30,6 +30,7 @@
     #borderWrapper {
       margin-top: 80px; /* adjust for header height */
     }
+    
   </style>
 </head>
 <body>
@@ -37,12 +38,8 @@
   <!-- Black overlay for fade-in -->
   <div class="fade-overlay"></div>
 
-  <!-- Shared Header -->
-  <header id="siteHeader">
-    <h1>Mirrin's Gate</h1>
-    <a href="index.html" class="back-button">← Back to Landing</a>
-    <a href="journal.html" class="back-button" style="left: auto; right: 20px;">📜 Journal</a>
-  </header>
+  <div id="header-container"></div>
+
 
   <div id="borderWrapper">
     <img id="mapBorder" src="images/border.png" alt="Map Border">
@@ -59,5 +56,14 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-container').innerHTML = data;
+      })
+      .catch(err => console.error('Failed to load header:', err));
+  </script>
+
 </body>
 </html>
