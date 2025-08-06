@@ -5,42 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mirrin's Gate</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="loader.css"> <!-- Shared loader CSS -->
+
   <style>
-    /* Fade from black overlay */
-    .fade-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      z-index: 9999;
-      animation: fadeOut 0.5s ease-in-out forwards;
-    }
-
-    @keyframes fadeOut {
-      from { opacity: 1; }
-      to { opacity: 0; visibility: hidden; }
-    }
-
     body {
-      margin: 0; /* ensure header aligns correctly */
+      margin: 0;
     }
-
     #borderWrapper {
-      margin-top: 80px; /* adjust for header height */
+      margin-top: 100px; /* slightly more space under header */
+      visibility: hidden; /* hide until preloaded */
     }
-    
   </style>
 </head>
 <body>
 
-  <!-- Black overlay for fade-in -->
-  <div class="fade-overlay"></div>
+  <!-- Loading Screen -->
+  <div id="loadingScreen">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
 
+  <!-- Header -->
   <div id="header-container"></div>
 
-
+  <!-- Main Content -->
   <div id="borderWrapper">
     <img id="mapBorder" src="images/border.png" alt="Map Border">
 
@@ -55,14 +43,24 @@
     </div>
   </div>
 
+  <script src="loader.js"></script>
   <script src="script.js"></script>
   <script>
+    // Load header dynamically
     fetch('header.html')
       .then(response => response.text())
-      .then(data => {
-        document.getElementById('header-container').innerHTML = data;
-      })
+      .then(data => document.getElementById('header-container').innerHTML = data)
       .catch(err => console.error('Failed to load header:', err));
+
+    // Initialize loader with images to preload
+    initLoader(
+      [
+        'images/background.png',
+        'images/border.png',
+        'images/street.png'
+      ],
+      '#borderWrapper'
+    );
   </script>
 
 </body>
