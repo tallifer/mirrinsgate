@@ -18,35 +18,56 @@ async function loadScenes() {
   loadScene("street");
 }
 
-// Load a scene and setup hotspots
 function loadScene(name) {
   const scene = scenes[name];
   if (!scene) return;
 
-  sceneImg.src = scene.image;
+  const loadingScreen = document.getElementById('loadingScreen');
+  loadingScreen.style.display = 'flex';
 
-  // Clear old hotspots
-  hotspotContainer.innerHTML = "";
+  // Fade out scene image
+  sceneImg.style.transition = 'opacity 0.4s ease';
+  sceneImg.style.opacity = '0';
 
-  // Add new hotspots
-  scene.hotspots.forEach(h => {
-    const div = document.createElement("div");
-    div.className = "hotspot";
-    div.dataset.label = h.label;
-    div.style.left = h.x + "px";
-    div.style.top = h.y + "px";
-    div.style.width = h.w + "px";
-    div.style.height = h.h + "px";
-    div.onclick = () => loadScene(h.target);
-    hotspotContainer.appendChild(div);
-  });
+  // Preload new image
+  const img = new Image();
+  img.src = scene.image;
+  img.onload = () => {
+    setTimeout(() => {
+      sceneImg.src = scene.image;
 
-  // Start conversation if exists
-  if (scene.conversation && scene.conversation.length > 0) {
-    startConversation(scene.conversation);
-  } else {
-    hideDialogue();
-  }
+      // Clear and rebuild hotspots
+      hotspotContainer.innerHTML = "";
+      scene.hotspots.forEach(h => {
+        const div = document.createElement("div");
+        div.className = "hotspot";
+        div.dataset.label = h.label;
+        div.style.left = h.x + "px";
+        div.style.top = h.y + "px";
+        div.style.width = h.w + "px";
+        div.style.height = h.h + "px";
+        div.onclick = () => loadScene(h.target);
+        hotspotContainer.appendChild(div);
+      });
+
+      // Fade in new scene image
+      setTimeout(() => {
+        sceneImg.style.opacity = '1';
+
+        // Remove loading overlay
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+
+          if (scene.conversation) {
+            startConversation(scene.conversation);
+          } else {
+            hideDialogue();
+          }
+        }, 300);
+
+      }, 50);
+    }, 400);
+  };
 }
 
 // Typing effect with auto-advance after 2 seconds

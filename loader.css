@@ -1,36 +1,37 @@
-/* loader.css */
 #loadingScreen {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('images/background.png') repeat;
-  background-size: cover;
-  display: flex;
+  position: absolute;           /* Not fixed */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);  /* slight dimming */
+  z-index: 9999;
+  display: none;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  z-index: 9999;
-  transition: opacity 0.5s ease;
+  pointer-events: none;  /* Don’t block clicks */
+}
+
+#loadingScreen .spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #fff;
+  border-top: 6px solid #b28c5b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 #loadingScreen.hidden {
   opacity: 0;
+  transition: opacity 0.4s ease;
   pointer-events: none;
-}
-
-.spinner {
-  border: 6px solid #e0c68b;
-  border-top: 6px solid #5c3a1a;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 20px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 #loadingScreen p {
