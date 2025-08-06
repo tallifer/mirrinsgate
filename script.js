@@ -22,21 +22,23 @@ function loadScene(name) {
   const scene = scenes[name];
   if (!scene) return;
 
+  const fadeOverlay = document.getElementById('fadeOverlay');
   const loadingScreen = document.getElementById('loadingScreen');
+
+  // Fade to black
+  fadeOverlay.style.opacity = '1';
+
+  // Optional: show spinner on top of fade
   loadingScreen.style.display = 'flex';
 
-  // Fade out scene image
-  sceneImg.style.transition = 'opacity 0.4s ease';
-  sceneImg.style.opacity = '0';
-
-  // Preload new image
-  const img = new Image();
-  img.src = scene.image;
-  img.onload = () => {
-    setTimeout(() => {
+  setTimeout(() => {
+    // Preload new image while screen is black
+    const img = new Image();
+    img.src = scene.image;
+    img.onload = () => {
       sceneImg.src = scene.image;
 
-      // Clear and rebuild hotspots
+      // Rebuild hotspots
       hotspotContainer.innerHTML = "";
       scene.hotspots.forEach(h => {
         const div = document.createElement("div");
@@ -50,25 +52,21 @@ function loadScene(name) {
         hotspotContainer.appendChild(div);
       });
 
-      // Fade in new scene image
+      // Fade back in
       setTimeout(() => {
-        sceneImg.style.opacity = '1';
+        fadeOverlay.style.opacity = '0';
+        loadingScreen.style.display = 'none';
 
-        // Remove loading overlay
-        setTimeout(() => {
-          loadingScreen.style.display = 'none';
-
-          if (scene.conversation) {
-            startConversation(scene.conversation);
-          } else {
-            hideDialogue();
-          }
-        }, 300);
-
-      }, 50);
-    }, 400);
-  };
+        if (scene.conversation) {
+          startConversation(scene.conversation);
+        } else {
+          hideDialogue();
+        }
+      }, 300);
+    };
+  }, 300); // wait for fade-to-black before swapping
 }
+
 
 // Typing effect with auto-advance after 2 seconds
 function typeText(text, speed = 20, callback = null) {
