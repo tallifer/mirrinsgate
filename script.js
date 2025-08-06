@@ -62,9 +62,9 @@ function loadScene(name) {
         } else {
           hideDialogue();
         }
-      }, 300);
+      }, 100);
     };
-  }, 300); // wait for fade-to-black before swapping
+  }, 100); // wait for fade-to-black before swapping
 }
 
 
