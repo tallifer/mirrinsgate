@@ -57,8 +57,16 @@
       .then(response => response.text())
       .then(data => document.getElementById('header-container').innerHTML = data)
       .catch(err => console.error('Failed to load header:', err));
-
-    // Initialize loader with images to preload
+  
+    const fromIndex = sessionStorage.getItem('fromIndex') === 'true';
+  
+    // Set overlay black before load starts
+    if (fromIndex) {
+      const fadeOverlay = document.getElementById('fadeOverlay');
+      fadeOverlay.style.opacity = '1';
+    }
+  
+    // Start loader
     initLoader(
       [
         'images/background.png',
@@ -67,7 +75,18 @@
       ],
       '#borderWrapper'
     );
+  
+    // Wait for loader.js to finish preloading images
+    window.addEventListener('load', () => {
+      if (fromIndex) {
+        const fadeOverlay = document.getElementById('fadeOverlay');
+        fadeOverlay.style.transition = 'opacity 1s ease-in-out';
+        fadeOverlay.style.opacity = '0';
+        sessionStorage.removeItem('fromIndex');
+      }
+    });
   </script>
+  
 
 </body>
 </html>

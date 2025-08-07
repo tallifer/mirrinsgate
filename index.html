@@ -111,11 +111,8 @@
 
   <script>
     function fadeToTown() {
-      const overlay = document.getElementById('fadeOverlay');
-      overlay.classList.add('fade-to-black');
-      setTimeout(() => {
-        window.location.href = 'town.html';
-      }, 1000); // Matches fade duration
+      sessionStorage.setItem('fromIndex', 'true');
+      window.location.href = 'town.html';
     }
   </script>
 </body>
