@@ -5,25 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mirrin's Gate</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="loader.css"> <!-- Shared loader CSS -->
+  <link rel="stylesheet" href="loader.css">
 
   <style>
-    body {
-      margin: 0;
+    #pageFadeOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      opacity: 1;
+      z-index: 9999;
+      pointer-events: none;
+      transition: opacity 1s ease;
     }
+
     #borderWrapper {
-      margin-top: 100px; /* slightly more space under header */
-      visibility: hidden; /* hide until preloaded */
+      margin-top: 100px;
+      visibility: hidden;
     }
   </style>
 </head>
 <body>
-
-  <!-- Loading Screen -->
-  <div id="loadingScreen">
-    <div class="spinner"></div>
-    <p>Loading...</p>
-  </div>
+  <!-- Fullscreen black fade -->
+  <div id="pageFadeOverlay"></div>
 
   <!-- Header -->
   <div id="header-container"></div>
@@ -34,7 +40,7 @@
 
     <div id="game">
       <div id="fadeOverlay"></div>
-      
+
       <img id="scene" src="images/street.webp" alt="scene">
       <div id="hotspots"></div>
 
@@ -42,7 +48,7 @@
         <span id="closeDialogue">✖</span>
         <p id="dialogueText"></p>
       </div>
-      <!-- Loader overlays just the game scene -->
+
       <div id="loadingScreen">
         <div class="spinner"></div>
       </div>
@@ -52,41 +58,52 @@
   <script src="loader.js"></script>
   <script src="script.js"></script>
   <script>
-    // Load header dynamically
-    fetch('header.html')
-      .then(response => response.text())
-      .then(data => document.getElementById('header-container').innerHTML = data)
-      .catch(err => console.error('Failed to load header:', err));
-  
     const fromIndex = sessionStorage.getItem('fromIndex') === 'true';
-  
-    // Set overlay black before load starts
-    if (fromIndex) {
-      const fadeOverlay = document.getElementById('fadeOverlay');
-      fadeOverlay.style.opacity = '1';
-    }
-  
-    // Start loader
-    initLoader(
-      [
-        'images/background.webp',
-        'images/border.webp',
-        'images/street.webp'
-      ],
-      '#borderWrapper'
-    );
-  
-    // Wait for loader.js to finish preloading images
-    window.addEventListener('load', () => {
-      if (fromIndex) {
-        const fadeOverlay = document.getElementById('fadeOverlay');
-        fadeOverlay.style.transition = 'opacity 1s ease-in-out';
-        fadeOverlay.style.opacity = '0';
-        sessionStorage.removeItem('fromIndex');
-      }
-    });
-  </script>
-  
+    sessionStorage.removeItem('fromIndex'); // clear it immediately
 
+    const pageFade = document.getElementById('pageFadeOverlay');
+
+    // 🛠️ If NOT from index, remove black overlay immediately
+    if (!fromIndex && pageFade) {
+      pageFade.remove();
+    }
+
+    let headerLoaded = false;
+    let imagesLoaded = false;
+
+    function maybeReveal() {
+      if (headerLoaded && imagesLoaded) {
+        if (fromIndex) {
+          setTimeout(() => {
+            pageFade.style.opacity = '0';
+            setTimeout(() => pageFade.remove(), 1000);
+            sessionStorage.removeItem('fromIndex');
+          }, 100);
+        } else {
+          pageFade.remove();
+        }
+      }
+    }
+
+    // Load header
+    fetch('header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('header-container').innerHTML = html;
+        headerLoaded = true;
+        maybeReveal();
+      });
+
+    // Load assets
+    initLoader(
+      ['images/background.webp', 'images/border.webp', 'images/street.webp'],
+      '#borderWrapper',
+      () => {
+        imagesLoaded = true;
+        maybeReveal();
+      },
+      !fromIndex // show spinner only if not from index.html
+    );
+  </script>
 </body>
 </html>

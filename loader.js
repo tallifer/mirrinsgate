@@ -1,4 +1,3 @@
-// loader.js
 function preloadImages(images, callback) {
   let loaded = 0;
   const total = images.length;
@@ -13,20 +12,27 @@ function preloadImages(images, callback) {
   });
 }
 
-// Initialize loader
-function initLoader(imagesToPreload, contentSelector) {
-  document.addEventListener('DOMContentLoaded', () => {
-    const loadingScreen = document.getElementById('loadingScreen');
-    const content = document.querySelector(contentSelector);
-    if (content) content.style.visibility = 'hidden';
+function initLoader(imagesToPreload, contentSelector, onComplete = null, showSpinner = true) {
+  const loadingScreen = document.getElementById('loadingScreen');
+  const content = document.querySelector(contentSelector);
 
-    preloadImages(imagesToPreload, () => {
-      // Fade out the loading screen
+  if (content) content.style.visibility = 'hidden';
+
+  if (showSpinner && loadingScreen) {
+    loadingScreen.style.display = 'flex';
+  }
+
+  preloadImages(imagesToPreload, () => {
+    if (loadingScreen) {
       loadingScreen.classList.add('hidden');
       setTimeout(() => {
         loadingScreen.style.display = 'none';
         if (content) content.style.visibility = 'visible';
+        if (onComplete) onComplete();
       }, 500);
-    });
+    } else {
+      if (content) content.style.visibility = 'visible';
+      if (onComplete) onComplete();
+    }
   });
 }
