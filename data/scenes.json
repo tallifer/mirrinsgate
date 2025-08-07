@@ -12,12 +12,8 @@
       { "x": 100, "y": 0, "w": 150, "h": 500, "target": "street", "label": "Back to town" }
     ],
     "conversation": [
-      "Ah… a visitor. Few seek the Wild Man now.",
-      "I was once a soldier of Mirin’s Gate, hunting beasts in the deep woods… until the woods claimed me instead.",
-      "The druids taught me the Balance, the old ways. I walked as one of them, until darkness crept into the grove.",
-      "I fled as it withered. I returned here… older, but not as old as I should be.",
-      "Now I heal, I guide, I watch. They call me Greenfather… the Last Leaf.",
-      "The forest still whispers to me. Something stirs there again… and when it calls, I will answer."
+      "Ah… a visitor. Few seek a Greenfather now.",
+      "What can I do for you?"
     ]
   },
   "tavern": {

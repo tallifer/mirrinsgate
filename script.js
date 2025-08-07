@@ -69,7 +69,7 @@ function loadScene(name) {
 
 
 // Typing effect with auto-advance after 2 seconds
-function typeText(text, speed = 20, callback = null) {
+function typeText(text, speed = 40, callback = null) {
   dialogueText.textContent = "";
   let index = 0;
 
@@ -102,7 +102,7 @@ function typeNextLine() {
   }
 
   const line = currentConversation[currentLine++];
-  typeText(line, 20, typeNextLine);
+  typeText(line, 40, typeNextLine);
 }
 
 function hideDialogue() {
