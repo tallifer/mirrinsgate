@@ -43,5 +43,10 @@
     "title": "A Concern About Worms",
     "image": "journal_data/images/AConcernAboutWorms.webp",
     "markdownFile": "journal_data/posts/AConcernAboutWorms.md"
+  },
+  {
+    "title": "Will Can Write Code?",
+    "image": "journal_data/images/Rikkit.webp",
+    "markdownFile": "journal_data/posts/WillTest.md"
   }
 ]
