@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mirrin's Gate - World</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="loader.css"> <!-- Shared loader CSS -->
   <style>
     body {
       margin: 0;
@@ -21,6 +22,7 @@
 
     /* Wrapper should be full border size */
     #borderWrapper {
+        visibility: hidden; /* Hide until preload completes */
         position: relative;
         display: inline-block;
         width: 975px;   /* full border image size */
@@ -70,6 +72,12 @@
   </style>
 </head>
 <body>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
 
   <!-- Header -->
   <div id="header-container"></div>
@@ -156,5 +164,19 @@
 
     updateTransform();
   </script>
+
+  <script src="loader.js"></script>
+  <script>
+    // Initialize loader with images to preload
+    initLoader(
+      [
+        'images/background.png',
+        'images/border.png',
+        'images/world_medium.png'
+      ],
+      '#borderWrapper'
+    );
+  </script>
+
 </body>
 </html>
