@@ -35,6 +35,11 @@
     "markdownFile": "journal_data/posts/FirstSteps.md"
   },
   {
+    "title": "Stonejaw's Tavern Tale",
+    "image": "journal_data/images/StonejawsTavernTale.webp",
+    "markdownFile": "journal_data/posts/StonejawsTavernTale.md"
+  },
+  {
     "title": "A Concern About Worms",
     "image": "journal_data/images/AConcernAboutWorms.webp",
     "markdownFile": "journal_data/posts/AConcernAboutWorms.md"
