@@ -1,42 +1,42 @@
 [
   {
     "title": "The Journey Begins",
-    "image": "journal_data/images/TheJourneyBegins.png",
+    "image": "journal_data/images/TheJourneyBegins.webp",
     "markdownFile": "journal_data/posts/TheJourneyBegins.md"
   },
   {
     "title": "Shale - Cleric of Thoth",
-    "image": "journal_data/images/Shale.png",
+    "image": "journal_data/images/Shale.webp",
     "markdownFile": "journal_data/posts/Shale.md"
   },
   {
     "title": "Helgen - the Last Leaf",
-    "image": "journal_data/images/Helgen.png",
+    "image": "journal_data/images/Helgen.webp",
     "markdownFile": "journal_data/posts/Helgen.md"
   },
   {
     "title": "Stonejaw - The Hammer",
-    "image": "journal_data/images/Stonejaw.jpeg",
+    "image": "journal_data/images/Stonejaw.webp",
     "markdownFile": "journal_data/posts/Stonejaw.md"
   },
   {
     "title": "Rikkit",
-    "image": "journal_data/images/Rikkit.jpeg",
+    "image": "journal_data/images/Rikkit.webp",
     "markdownFile": "journal_data/posts/Rikkit.md"
   },
   {
     "title": "Chapter One",
-    "image": "journal_data/images/map_chapter_1.png",
+    "image": "journal_data/images/map_chapter_1.webp",
     "markdownFile": "journal_data/posts/ChapterOne.md"
   },
   {
     "title": "First Steps",
-    "image": "journal_data/images/FirstSteps.png",
+    "image": "journal_data/images/FirstSteps.webp",
     "markdownFile": "journal_data/posts/FirstSteps.md"
   },
   {
     "title": "A Concern About Worms",
-    "image": "journal_data/images/AConcernAboutWorms.png",
+    "image": "journal_data/images/AConcernAboutWorms.webp",
     "markdownFile": "journal_data/posts/AConcernAboutWorms.md"
   }
 ]
