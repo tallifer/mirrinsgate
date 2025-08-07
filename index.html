@@ -21,7 +21,8 @@
       width: 100%;
     }
 
-    .landing-container img {
+    /* Only apply this to the background image, not all images */
+    .landing-container > img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -36,43 +37,33 @@
       left: 0;
       width: 100%;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       background: rgba(0,0,0,0.25);
-      text-align: center;
       opacity: 0;
       animation: fadeIn 3s ease-in-out forwards;
       animation-delay: 1.5s;
+      pointer-events: none; /* overlay should not block clicks */
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .overlay h1 {
-      color: #fff8e6;
-      font-size: 4rem;
-      margin-bottom: 40px;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
-    }
-
-    .overlay button {
-      font-size: 1.5rem;
-      padding: 15px 40px;
-      background: #b28c5b;
-      color: white;
-      border: none;
-      border-radius: 12px;
+    .overlay-button {
+      position: absolute;
+      width: 100px;       /* Scaled down button size */
+      height: auto;
+      max-width: 10vw;
+      object-fit: contain;
+      pointer-events: auto;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      transition: background 0.3s ease, transform 0.3s ease;
-      transform: scale(0.9);
+      transition: transform 0.3s ease;
     }
 
-    .overlay button:hover {
-      background: #9b764a;
-      transform: scale(1.05);
+    .overlay-button:hover {
+      transform: scale(1.1);
     }
 
-    /* Black overlay for page transitions */
+    /* Fade overlay for transitions */
     .fade-overlay {
       position: fixed;
       top: 0;
@@ -106,8 +97,12 @@
   <div class="landing-container">
     <img src="images/landing.png" alt="Mirrin's Gate Landing">
     <div class="overlay">
-      <h1>Welcome to Mirrin's Gate</h1>
-      <button onclick="fadeToTown()">Enter the Town</button>
+      <img 
+        src="icons/enter.png" 
+        alt="Enter the Town" 
+        class="overlay-button" 
+        onclick="fadeToTown()"
+      >
     </div>
   </div>
 
