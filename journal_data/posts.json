@@ -43,5 +43,10 @@
     "title": "A Concern About Worms",
     "image": "journal_data/images/AConcernAboutWorms.webp",
     "markdownFile": "journal_data/posts/AConcernAboutWorms.md"
+  },
+  {
+    "title": "A Shortcut To Mushrooms",
+    "image": "journal_data/images/AShortcutToMushrooms.webp",
+    "markdownFile": "journal_data/posts/AShortcutToMushrooms.md"
   }
 ]
