@@ -18,61 +18,6 @@
       color: #3a2a18;
     }
 
-    /* === HEADER BAR === */
-    .header-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 65px; /* same as town.html */
-      background: url('icons/header_bar.png') repeat-x center center;
-      background-size: auto 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .header-content {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 30px;
-      box-sizing: border-box;
-    }
-
-    .header-title {
-      font-size: 2rem;
-      color: #3a2a18;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-      margin: 0;
-    }
-
-    .icon-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      margin: 0 5px;
-    }
-
-    .icon-button img {
-      height: 52px;
-      width: 52px;
-      transition: transform 0.2s ease;
-    }
-
-    .icon-button img:hover {
-      transform: scale(1.1);
-    }
-
-    .header-icons.left,
-    .header-icons.right {
-      display: flex;
-      align-items: center;
-    }
-
     /* === JOURNAL LAYOUT === */
     #sidebar {
       position: fixed;
@@ -142,34 +87,7 @@
 </head>
 <body>
   <!-- Fancy Header -->
-  <header class="header-bar">
-    <div class="header-content">
-      <div class="header-icons left">
-        <button class="icon-button" onclick="window.location.href='index.html'">
-          <img src="icons/icon_back.webp" alt="Back">
-        </button>
-      </div>
-
-      <h1 class="header-title">Mirrin's Gate</h1>
-
-
-      <!-- Right Icons -->
-      <div class="header-icons right">
-        <button class="icon-button" onclick="window.location.href='town.html'">
-          <img src="icons/icon_town.webp" alt="Town">
-        </button>
-        <button class="icon-button" onclick="window.location.href='world.html'">
-          <img src="icons/icon_world.webp" alt="World Map">
-        </button>
-        <button class="icon-button" onclick="window.location.href='journal.html'">
-          <img src="icons/icon_journal.webp" alt="Journal">
-        </button>
-        <button class="icon-button">
-          <img id="musicToggle" src="icons/icon_unmute.webp" alt="Toggle Music">
-        </button>
-      </div>
-    </div>
-  </header>
+  <div id="header-container"></div>
 
   <!-- Journal Layout -->
   <div class="journal-container">
@@ -184,14 +102,28 @@
   </div>
 
   <script>
-  // Music toggle
-  const musicButton = document.getElementById('musicToggle');
-  let musicOn = true;
+  function loadHeader() {
+    return fetch('header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('header-container').innerHTML = html;
 
-  musicButton.addEventListener('click', () => {
-    musicOn = !musicOn;
-    musicButton.src = musicOn ? 'icons/icon_unmute.webp' : 'icons/icon_mute.webp';
-  });
+        if (!document.querySelector('link[href="header.css"]')) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = 'header.css';
+          document.head.appendChild(link);
+        }
+
+        if (!document.querySelector('script[src="header.js"]')) {
+          const script = document.createElement('script');
+          script.src = 'header.js';
+          document.head.appendChild(script);
+        }
+      });
+  }
+
+  loadHeader();
 
   async function fetchMarkdown(post) {
     // 1️⃣ If inline markdown exists, use it

@@ -93,10 +93,28 @@
 </div>
 
   <script>
-    // Load header dynamically
-    fetch('header.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('header-container').innerHTML = data);
+    function loadHeader() {
+      return fetch('header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('header-container').innerHTML = html;
+
+          if (!document.querySelector('link[href="header.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'header.css';
+            document.head.appendChild(link);
+          }
+
+          if (!document.querySelector('script[src="header.js"]')) {
+            const script = document.createElement('script');
+            script.src = 'header.js';
+            document.head.appendChild(script);
+          }
+        });
+    }
+
+    loadHeader();
 
     const map = document.getElementById('worldMap');
     const container = document.getElementById('mapContainer');
