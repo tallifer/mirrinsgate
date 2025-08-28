@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .header-content {
@@ -20,14 +21,21 @@
   align-items: center;
   padding: 0 30px;
   box-sizing: border-box;
+  position: relative;
 }
 
 .header-title {
-  font-size: 2rem;
-  color: #3a2a18;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-  margin: 0;
+  font-size: 2.2rem;
   font-family: 'Georgia', serif;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* --- NEW: "Burnt-in" leather effect --- */
+  color: #2a1a0a; /* Dark, burnt brown color */
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.1), /* Subtle top highlight */
+               -1px -1px 0px rgba(0, 0, 0, 0.5); /* Main inner shadow */
 }
 
 .icon-button {
@@ -41,11 +49,12 @@
 .icon-button img {
   height: 52px;
   width: 52px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, filter 0.2s ease; /* Added filter to transition */
 }
 
 .icon-button img:hover {
   transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 .header-icons.left,
