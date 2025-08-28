@@ -5,6 +5,7 @@ This document will get you up to speed on how the project is organised and how y
 ## Directory Structure
 The project is organized to keep things clean and predictable. Here’s a map of the key areas:
 
+```
 /mirrins-gate/
 |
 |-- assets/             # All visual and audio assets
@@ -23,40 +24,37 @@ The project is organized to keep things clean and predictable. Here’s a map of
 |-- js/                 # JavaScript files that make the game run
 |   |-- main.js         # Core logic for the town scene
 |   |-- journal.js      # Logic for the journal page
-|   |-- world-map.js.   # Logic for the map (panning, zoom etc.)
+|   |-- world-map.js    # Logic for the map (panning, zoom etc.)
 |   `-- loader.js       # Used to hide image pop in
 |
 |-- *.html              # The main pages of the site (index.html, town.html, etc.)
 `-- Readme.md           # This file!
+```
 
 
 ## How to Add a New Journal Entry
 Adding a new journal entry is a three-step process that involves adding the image, writing the content, and listing it in the main journal file.
 
 ### Step 1: Add the Journal Image
-Place the image for your journal entry into the data/journal/images/ folder. (e.g., data/journal/images/AncientAmulet.webp).
+1. Place the image for your journal entry into the `data/journal/images/` folder. (e.g., `data/journal/images/AncientAmulet.webp`).
 
 ### Step 2: Write the Journal Content
-Create a new Markdown file (.md) inside the data/journal/posts/ folder. The name should be simple and descriptive (e.g., AncientAmulet.md).
+1. Create a new Markdown file (`.md`) inside the `data/journal/posts/` folder. The name should be simple and descriptive (e.g., `AncientAmulet.md`).
 
-Write your journal entry in this file using Markdown for formatting (e.g., # for titles, * for italics).
+2. Write your journal entry in this file using Markdown for formatting (e.g., `#` for titles, `*` for italics).
 
 ### Step 3: Add the Entry to posts.json
-Open the data/journal/posts.json file. This is an array that lists all the journal entries.
+1. Open the `data/journal/posts.json` file. This is an array that lists all the journal entries.
 
-Add a new object to the array for your new entry. This object needs three things:
+2. Add a new object to the array for your new entry. This object needs three things:
+   * `"title"`: The title of your journal entry.
+   * `"image"`: The path to the image you added in Step 1.
+   * `"markdownFile"`: The path to the `.md` file you created in Step 2.
 
-"title": The title of your journal entry.
-
-"image": The path to the image you added in Step 1.
-
-"markdownFile": The path to the .md file you created in Step 2.
-
-Example:
+**Example:**
 
 ```json
 // In data/journal/posts.json
-
 [
   {
     "title": "The Journey Begins",
@@ -72,35 +70,32 @@ Example:
     "markdownFile": "data/journal/posts/AncientAmulet.md"
   }
 ]
-
+```
 The journal page will automatically pick up the new entry and display it.
 
 ## How to Add a New Scene to the Town
 Adding a new explorable area to the town (like a shop, a house, or a hidden alley) is a two-step process.
 
 ### Step 1: Add the Scene's Image
-Get the image you want to use for the new scene. Make sure it's a .webp file for better performance.
+1. Get the image you want to use for the new scene. Make sure it's a `.webp` file for better performance.
 
-Place the image inside the assets/images/ folder. For example, let's say you add assets/images/AlchemistsShop.webp.
+2. Place the image inside the `assets/images/` folder. For example, let's say you add `assets/images/AlchemistsShop.webp`.
 
 ### Step 2: Define the Scene in data/scenes.json
-Now, open the data/scenes.json file. This is where the magic happens. You'll add a new entry for your scene.
+Now, open the `data/scenes.json` file. This is where the magic happens. You'll add a new entry for your scene.
 
-Create the Scene Definition: Add a new key-value pair to the JSON object. The key is a unique name for your scene (e.g., "alchemistShop"), and the value is an object containing the scene's details.
+1. **Create the Scene Definition:** Add a new key-value pair to the JSON object. The key is a unique name for your scene (e.g., `"alchemistShop"`), and the value is an object containing the scene's details.
 
-Link the Image: Set the "image" property to the path of the image you added in Step 1.
+2. **Link the Image:** Set the `"image"` property to the path of the image you added in Step 1.
 
-(Optional) Add Dialogue: If you want text to appear when the player enters, add a "conversation" array with the lines of dialogue.
+3. **(Optional) Add Dialogue:** If you want text to appear when the player enters, add a `"conversation"` array with the lines of dialogue.
 
-Add Hotspots: To allow the player to move, you need hotspots. The most important one is a "back" hotspot to return to the previous scene. A hotspot needs coordinates (x, y), dimensions (w, h), a label that shows on hover, and a "target" that matches the key of the scene it links to.
+4. **Add Hotspots:** To allow the player to move, you need hotspots. The most important one is a "back" hotspot to return to the previous scene. A hotspot needs coordinates (`x`, `y`), dimensions (`w`, `h`), a `label` that shows on hover, and a `"target"` that matches the key of the scene it links to.
 
-Example:
-
-Let's say we want to add an Alchemist's Shop that you can enter from the main street.
+**Example:**
 
 ```json
 // In data/scenes.json
-
 {
   "street": {
     "image": "assets/images/street.webp",
@@ -126,7 +121,7 @@ Let's say we want to add an Alchemist's Shop that you can enter from the main st
     ]
   }
 }
-
+```
 That's it! The game will automatically handle the rest.
 
 That's all you need to know to start expanding the world. Have fun creating!
