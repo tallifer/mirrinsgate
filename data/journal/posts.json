@@ -1,51 +1,61 @@
 [
   {
     "title": "The Journey Begins",
+    "chapter": "Mirrins Gate",
     "image": "data/journal/images/TheJourneyBegins.webp",
     "markdownFile": "data/journal/posts/TheJourneyBegins.md"
   },
   {
     "title": "Shale - Cleric of Thoth",
+    "chapter": "Dramatis Personae",
     "image": "data/journal/images/Shale.webp",
     "markdownFile": "data/journal/posts/Shale.md"
   },
   {
     "title": "Helgen - the Last Leaf",
+    "chapter": "Dramatis Personae",
     "image": "data/journal/images/Helgen.webp",
     "markdownFile": "data/journal/posts/Helgen.md"
   },
   {
     "title": "Stonejaw - The Hammer",
+    "chapter": "Dramatis Personae",
     "image": "data/journal/images/Stonejaw.webp",
     "markdownFile": "data/journal/posts/Stonejaw.md"
   },
   {
     "title": "Rikkit",
+    "chapter": "Dramatis Personae",
     "image": "data/journal/images/Rikkit.webp",
     "markdownFile": "data/journal/posts/Rikkit.md"
   },
   {
-    "title": "Chapter One",
+    "title": "Chapter One Map",
+    "chapter": "1 First Steps",
     "image": "data/journal/images/map_chapter_1.webp",
     "markdownFile": "data/journal/posts/ChapterOne.md"
   },
   {
     "title": "First Steps",
+    "chapter": "1 First Steps",
     "image": "data/journal/images/FirstSteps.webp",
     "markdownFile": "data/journal/posts/FirstSteps.md"
   },
   {
     "title": "Stonejaw's Tavern Tale",
+    "chapter": "1 First Steps",
     "image": "data/journal/images/StonejawsTavernTale.webp",
     "markdownFile": "data/journal/posts/StonejawsTavernTale.md"
   },
   {
     "title": "A Concern About Worms",
+    "chapter": "2 Horticulture",
     "image": "data/journal/images/AConcernAboutWorms.webp",
     "markdownFile": "data/journal/posts/AConcernAboutWorms.md"
   },
   {
     "title": "A Shortcut To Mushrooms",
+    "chapter": "2 Horticulture",
     "image": "data/journal/images/AShortcutToMushrooms.webp",
     "markdownFile": "data/journal/posts/AShortcutToMushrooms.md"
   }

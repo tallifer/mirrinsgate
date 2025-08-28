@@ -48,6 +48,7 @@ Adding a new journal entry is a three-step process that involves adding the imag
 
 2. Add a new object to the array for your new entry. This object needs three things:
    * `"title"`: The title of your journal entry.
+   * `"chapter"`: The name of the chapter this entry belongs to. If the chapter doesn't exist, a new collapsible group will be created for it in the sidebar.
    * `"image"`: The path to the image you added in Step 1.
    * `"markdownFile"`: The path to the `.md` file you created in Step 2.
 
@@ -58,6 +59,7 @@ Adding a new journal entry is a three-step process that involves adding the imag
 [
   {
     "title": "The Journey Begins",
+    "chapter": "Mirrins Gate",
     "image": "data/journal/images/TheJourneyBegins.webp",
     "markdownFile": "data/journal/posts/TheJourneyBegins.md"
   },
@@ -66,6 +68,7 @@ Adding a new journal entry is a three-step process that involves adding the imag
   // Our NEW journal entry
   {
     "title": "The Ancient Amulet",
+    "chapter": "1 First Steps",
     "image": "data/journal/images/AncientAmulet.webp",
     "markdownFile": "data/journal/posts/AncientAmulet.md"
   }
