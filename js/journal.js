@@ -40,10 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('data/journal/posts.json');
             const posts = await response.json();
 
-            // 1. Preload all images before doing anything else
             const imageUrls = posts.map(p => p.image).filter(Boolean);
             preloadImages(imageUrls, () => {
-                // 2. Once images are loaded, build the page
                 buildPage(posts);
             });
 
@@ -56,12 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function buildPage(posts) {
         const postsContainer = document.getElementById('posts');
         const sidebarList = document.getElementById('sidebarList');
-        postsContainer.innerHTML = ''; // Clear existing
-        sidebarList.innerHTML = ''; // Clear existing
+        postsContainer.innerHTML = '';
+        sidebarList.innerHTML = '';
 
         const chapters = {};
 
-        // Group posts by chapter
+        const chapterOrder = [...new Set(posts.map(p => p.chapter || "Uncategorized"))];
+
         posts.forEach((post, index) => {
             const chapterName = post.chapter || "Uncategorized";
             if (!chapters[chapterName]) {
@@ -70,10 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
             chapters[chapterName].push({ ...post, originalIndex: index });
         });
 
-        // Build sidebar and content
-        for (const chapterName in chapters) {
-            // Create sidebar elements
+        chapterOrder.forEach(chapterName => {
+            
             const chapterContainer = document.createElement('li');
+            chapterContainer.className = 'chapter-container';
             const chapterTitle = document.createElement('h3');
             chapterTitle.className = 'chapter-toggle';
             chapterTitle.textContent = chapterName;
@@ -84,16 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
             chapterContainer.appendChild(postList);
             sidebarList.appendChild(chapterContainer);
 
-            // Add posts for this chapter
             chapters[chapterName].forEach(post => {
                 const postID = `post-${post.originalIndex}`;
 
-                // Create sidebar link
                 const li = document.createElement('li');
                 li.innerHTML = `<a href="#${postID}">${post.title}</a>`;
                 postList.appendChild(li);
 
-                // Create main content post
                 const div = document.createElement('div');
                 div.className = 'post';
                 div.id = postID;
@@ -108,11 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            // Add toggle functionality
             chapterTitle.addEventListener('click', () => {
                 chapterContainer.classList.toggle('open');
             });
-        }
+        });
     }
 
     loadJournal();
