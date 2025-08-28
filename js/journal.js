@@ -57,8 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
         postsContainer.innerHTML = '';
         sidebarList.innerHTML = '';
 
-        const chapters = {};
+        // Create all post containers to guarantee order
+        posts.forEach((post, index) => {
+            const postID = `post-${index}`;
+            const div = document.createElement('div');
+            div.className = 'post';
+            div.id = postID;
+            postsContainer.appendChild(div);
+        });
 
+        const chapters = {};
         const chapterOrder = [...new Set(posts.map(p => p.chapter || "Uncategorized"))];
 
         posts.forEach((post, index) => {
@@ -70,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         chapterOrder.forEach(chapterName => {
-            
             const chapterContainer = document.createElement('li');
             chapterContainer.className = 'chapter-container';
             const chapterTitle = document.createElement('h3');
@@ -86,22 +93,23 @@ document.addEventListener('DOMContentLoaded', () => {
             chapters[chapterName].forEach(post => {
                 const postID = `post-${post.originalIndex}`;
 
+                // Create sidebar link
                 const li = document.createElement('li');
                 li.innerHTML = `<a href="#${postID}">${post.title}</a>`;
                 postList.appendChild(li);
 
-                const div = document.createElement('div');
-                div.className = 'post';
-                div.id = postID;
-                fetchMarkdown(post).then(markdownText => {
-                    let content = `<h2>${post.title}</h2>`;
-                    if (post.image) {
-                        content += `<img src="${post.image}" alt="${post.title}">`;
-                    }
-                    content += `<div>${marked.parse(markdownText)}</div>`;
-                    div.innerHTML = content;
-                    postsContainer.appendChild(div);
-                });
+                // --- MODIFIED: Find the existing container and fill it ---
+                const div = document.getElementById(postID);
+                if (div) {
+                    fetchMarkdown(post).then(markdownText => {
+                        let content = `<h2>${post.title}</h2>`;
+                        if (post.image) {
+                            content += `<img src="${post.image}" alt="${post.title}">`;
+                        }
+                        content += `<div>${marked.parse(markdownText)}</div>`;
+                        div.innerHTML = content;
+                    });
+                }
             });
 
             chapterTitle.addEventListener('click', () => {
