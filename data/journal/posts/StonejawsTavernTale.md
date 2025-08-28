@@ -1,4 +1,4 @@
-## Stonejaw's Tavern Tale
+## Stonejaw Grunts
 
 Hello, my dear friends. I am a storyteller of questionable renown, and today I find myself interpreting the grunts of an old man. Throughout my many years of travel, I have encountered all manner of brooding warriors and silent types, but Stone Jaw… well, he might have been hit in the face one too many times, or perhaps his silence hides something deeper.
 
