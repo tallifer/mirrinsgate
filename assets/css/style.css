@@ -1,6 +1,7 @@
+/* assets/css/style.css */
 body {
   /* Background image for entire page */
-  background: url('images/background.png') no-repeat center center fixed;
+  background: url('../images/background.webp') no-repeat center center fixed;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -8,42 +9,6 @@ body {
   height: 100vh;
   margin: 0;
 }
-
-/* Shared header */
-#siteHeader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(50, 30, 10, 0.85);
-    border-bottom: 2px solid #e4bc88;
-    text-align: center;
-    padding: 12px 20px;
-    font-size: 0.8rem;
-    line-height: 1.2;
-    box-sizing: border-box;
-}
-
-.back-button {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #b28c5b;
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-family: 'Georgia', serif;
-    font-size: 1rem;
-    transition: background 0.2s ease;
-}
-
-.back-button:hover {
-    background: #8c6d45;
-}
-
 
 /* Wrapper that holds border and game together */
 #borderWrapper {
@@ -99,7 +64,7 @@ body {
   position: absolute;
   width: 80px;
   height: 80px;
-  background: transparent; 
+  background: transparent;
   cursor: pointer;
   border-radius: 50%;
 }

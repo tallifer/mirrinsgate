@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mirrin's Gate</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="loader.css">
-  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/loader.css">
+  <link rel="stylesheet" href="assets/css/header.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
   <style>
     #pageFadeOverlay {
       position: fixed;
@@ -22,7 +21,6 @@
       pointer-events: none;
       transition: opacity 1s ease;
     }
-
     #borderWrapper {
       margin-top: 100px;
       visibility: hidden;
@@ -30,82 +28,70 @@
   </style>
 </head>
 <body>
-  <!-- Fullscreen black fade -->
   <div id="pageFadeOverlay"></div>
-
-  <!-- Header -->
   <div id="header-container"></div>
-
-  <!-- Main Content -->
   <div id="borderWrapper">
-    <img id="mapBorder" src="images/border.webp" alt="Map Border">
-
+    <img id="mapBorder" src="assets/images/border.webp" alt="Map Border">
     <div id="game">
       <div id="fadeOverlay"></div>
-
-      <img id="scene" src="images/street.webp" alt="scene">
+      <img id="scene" src="assets/images/street.webp" alt="scene">
       <div id="hotspots"></div>
-
       <div id="dialogueBox" class="hidden">
         <span id="closeDialogue">✖</span>
         <p id="dialogueText"></p>
       </div>
-
       <div id="loadingScreen">
         <div class="spinner"></div>
       </div>
     </div>
   </div>
 
-  <script src="loader.js"></script>
-  <script src="script.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/main.js"></script>
   <script>
-    const fromIndex = sessionStorage.getItem('fromIndex') === 'true';
-    sessionStorage.removeItem('fromIndex'); // clear it immediately
+    document.addEventListener('DOMContentLoaded', () => {
+      const fromIndex = sessionStorage.getItem('fromIndex') === 'true';
+      sessionStorage.removeItem('fromIndex');
+      const pageFade = document.getElementById('pageFadeOverlay');
 
-    const pageFade = document.getElementById('pageFadeOverlay');
+      if (!fromIndex && pageFade) {
+        pageFade.remove();
+      }
 
-    // 🛠️ If NOT from index, remove black overlay immediately
-    if (!fromIndex && pageFade) {
-      pageFade.remove();
-    }
+      let headerLoaded = false;
+      let imagesLoaded = false;
 
-    let headerLoaded = false;
-    let imagesLoaded = false;
-
-    function maybeReveal() {
-      if (headerLoaded && imagesLoaded) {
-        if (fromIndex) {
-          setTimeout(() => {
-            pageFade.style.opacity = '0';
-            setTimeout(() => pageFade.remove(), 1000);
-            sessionStorage.removeItem('fromIndex');
-          }, 100);
-        } else {
-          pageFade.remove();
+      function maybeReveal() {
+        if (headerLoaded && imagesLoaded) {
+          if (fromIndex) {
+            setTimeout(() => {
+              pageFade.style.opacity = '0';
+              setTimeout(() => pageFade.remove(), 1000);
+            }, 100);
+          } else {
+             if(pageFade) pageFade.remove();
+          }
         }
       }
-    }
 
-    // Load header
-    fetch('header.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('header-container').innerHTML = html;
-        headerLoaded = true;
-        maybeReveal();
-      });
+      fetch('header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('header-container').innerHTML = html;
+          headerLoaded = true;
+          maybeReveal();
+        });
 
-    // Load assets
-    initLoader(
-      ['images/background.webp', 'images/border.webp', 'images/street.webp'],
-      '#borderWrapper',
-      () => {
-        imagesLoaded = true;
-        maybeReveal();
-      },
-      !fromIndex // show spinner only if not from index.html
-    );
+      initLoader(
+        ['assets/images/background.webp', 'assets/images/border.webp', 'assets/images/street.webp'],
+        '#borderWrapper',
+        () => {
+          imagesLoaded = true;
+          maybeReveal();
+        },
+        !fromIndex
+      );
+    });
   </script>
 </body>
 </html>

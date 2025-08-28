@@ -1,0 +1,52 @@
+[
+  {
+    "title": "The Journey Begins",
+    "image": "data/journal/images/TheJourneyBegins.webp",
+    "markdownFile": "data/journal/posts/TheJourneyBegins.md"
+  },
+  {
+    "title": "Shale - Cleric of Thoth",
+    "image": "data/journal/images/Shale.webp",
+    "markdownFile": "data/journal/posts/Shale.md"
+  },
+  {
+    "title": "Helgen - the Last Leaf",
+    "image": "data/journal/images/Helgen.webp",
+    "markdownFile": "data/journal/posts/Helgen.md"
+  },
+  {
+    "title": "Stonejaw - The Hammer",
+    "image": "data/journal/images/Stonejaw.webp",
+    "markdownFile": "data/journal/posts/Stonejaw.md"
+  },
+  {
+    "title": "Rikkit",
+    "image": "data/journal/images/Rikkit.webp",
+    "markdownFile": "data/journal/posts/Rikkit.md"
+  },
+  {
+    "title": "Chapter One",
+    "image": "data/journal/images/map_chapter_1.webp",
+    "markdownFile": "data/journal/posts/ChapterOne.md"
+  },
+  {
+    "title": "First Steps",
+    "image": "data/journal/images/FirstSteps.webp",
+    "markdownFile": "data/journal/posts/FirstSteps.md"
+  },
+  {
+    "title": "Stonejaw's Tavern Tale",
+    "image": "data/journal/images/StonejawsTavernTale.webp",
+    "markdownFile": "data/journal/posts/StonejawsTavernTale.md"
+  },
+  {
+    "title": "A Concern About Worms",
+    "image": "data/journal/images/AConcernAboutWorms.webp",
+    "markdownFile": "data/journal/posts/AConcernAboutWorms.md"
+  },
+  {
+    "title": "A Shortcut To Mushrooms",
+    "image": "data/journal/images/AShortcutToMushrooms.webp",
+    "markdownFile": "data/journal/posts/AShortcutToMushrooms.md"
+  }
+]

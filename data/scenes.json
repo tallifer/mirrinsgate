@@ -1,13 +1,13 @@
 {
   "street": {
-    "image": "images/street.webp",
+    "image": "assets/images/street.webp",
     "hotspots": [
       { "x": 120, "y": 100, "w": 50, "h": 50, "target": "helgensHut", "label": "Helgen's Hut" },
       { "x": 490, "y": 200, "w": 150, "h": 100, "target": "tavern", "label": "Mirin's Gate Tavern" }
     ]
   },
   "helgensHut": {
-    "image": "images/HelgensHut.webp",
+    "image": "assets/images/HelgensHut.webp",
     "hotspots": [
       { "x": 100, "y": 0, "w": 150, "h": 500, "target": "street", "label": "Back to town" }
     ],
@@ -17,7 +17,7 @@
     ]
   },
   "tavern": {
-    "image": "images/Tavern.webp",
+    "image": "assets/images/Tavern.webp",
     "hotspots": [
       { "x": 700, "y": 500, "w": 80, "h": 80, "target": "street", "label": "Back to street" }
     ],

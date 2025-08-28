@@ -15,14 +15,11 @@
       overflow: hidden;
       background: black;
     }
-
     .landing-container {
       position: relative;
       height: 100%;
       width: 100%;
     }
-
-    /* Only apply this to the background image, not all images */
     .landing-container > img {
       width: 100%;
       height: 100%;
@@ -31,7 +28,6 @@
       transform: scale(1);
       animation: slowZoom 35s ease forwards;
     }
-
     .overlay {
       position: absolute;
       top: 0;
@@ -42,16 +38,14 @@
       opacity: 0;
       animation: fadeIn 3s ease-in-out forwards;
       animation-delay: 1.5s;
-      pointer-events: none; /* overlay should not block clicks */
-
+      pointer-events: none;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-
     .overlay-button {
       position: absolute;
-      width: 100px;       /* Scaled down button size */
+      width: 100px;
       height: auto;
       max-width: 10vw;
       object-fit: contain;
@@ -59,12 +53,9 @@
       cursor: pointer;
       transition: transform 0.3s ease;
     }
-
     .overlay-button:hover {
       transform: scale(1.1);
     }
-
-    /* Fade overlay for transitions */
     .fade-overlay {
       position: fixed;
       top: 0;
@@ -76,19 +67,12 @@
       opacity: 1;
       animation: fadeOut 1s ease-in-out forwards;
     }
-
-    .fade-to-black {
-      animation: fadeIn 1s ease-in-out forwards;
-    }
-
     @keyframes fadeOut {
       to { opacity: 0; visibility: hidden; }
     }
-
     @keyframes fadeIn {
       to { opacity: 1; }
     }
-
     @keyframes slowZoom {
       to { transform: scale(1.1); }
     }
@@ -96,20 +80,17 @@
 </head>
 <body>
   <div class="landing-container">
-    <img src="images/landing.webp" alt="Mirrin's Gate Landing">
+    <img src="assets/images/landing.webp" alt="Mirrin's Gate Landing">
     <div class="overlay">
-      <img 
-        src="icons/enter.png" 
-        alt="Enter the Town" 
-        class="overlay-button" 
+      <img
+        src="assets/images/icons/enter.png"
+        alt="Enter the Town"
+        class="overlay-button"
         onclick="fadeToTown()"
       >
     </div>
   </div>
-
-  <!-- Black overlay for page transitions -->
   <div class="fade-overlay" id="fadeOverlay"></div>
-
   <script>
     function fadeToTown() {
       sessionStorage.setItem('fromIndex', 'true');

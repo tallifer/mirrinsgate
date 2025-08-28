@@ -1,3 +1,4 @@
+// js/main.js
 let scenes = {};
 let currentConversation = [];
 let currentLine = 0;
@@ -10,7 +11,6 @@ const dialogueBox = document.getElementById("dialogueBox");
 const dialogueText = document.getElementById("dialogueText");
 const closeDialogue = document.getElementById("closeDialogue");
 
-// Load scenes from JSON
 async function loadScenes() {
   const response = await fetch("data/scenes.json");
   scenes = await response.json();
@@ -25,20 +25,15 @@ function loadScene(name) {
   const fadeOverlay = document.getElementById('fadeOverlay');
   const loadingScreen = document.getElementById('loadingScreen');
 
-  // Fade to black
   fadeOverlay.style.opacity = '1';
-
-  // Optional: show spinner on top of fade
   loadingScreen.style.display = 'flex';
 
   setTimeout(() => {
-    // Preload new image while screen is black
     const img = new Image();
     img.src = scene.image;
     img.onload = () => {
       sceneImg.src = scene.image;
 
-      // Rebuild hotspots
       hotspotContainer.innerHTML = "";
       scene.hotspots.forEach(h => {
         const div = document.createElement("div");
@@ -52,7 +47,6 @@ function loadScene(name) {
         hotspotContainer.appendChild(div);
       });
 
-      // Fade back in
       setTimeout(() => {
         fadeOverlay.style.opacity = '0';
         loadingScreen.style.display = 'none';
@@ -64,11 +58,9 @@ function loadScene(name) {
         }
       }, 100);
     };
-  }, 100); // wait for fade-to-black before swapping
+  }, 100);
 }
 
-
-// Typing effect with auto-advance after 2 seconds
 function typeText(text, speed = 40, callback = null) {
   dialogueText.textContent = "";
   let index = 0;
@@ -78,14 +70,12 @@ function typeText(text, speed = 40, callback = null) {
       dialogueText.textContent += text.charAt(index++);
       typingTimeout = setTimeout(typeNext, speed);
     } else if (callback) {
-      typingTimeout = setTimeout(callback, 2000); // auto-advance
+      typingTimeout = setTimeout(callback, 2000);
     }
   }
-
   typeNext();
 }
 
-// Conversation handling
 function startConversation(lines) {
   currentConversation = lines;
   currentLine = 0;
@@ -111,16 +101,17 @@ function hideDialogue() {
   clearTimeout(typingTimeout);
 }
 
-// Click to advance dialogue manually
-dialogueBox.addEventListener("click", () => {
-  typeNextLine();
-});
+if (dialogueBox) {
+    dialogueBox.addEventListener("click", () => {
+      typeNextLine();
+    });
+}
 
-// Close dialogue manually
-closeDialogue.addEventListener("click", (event) => {
-  event.stopPropagation();
-  hideDialogue();
-});
+if (closeDialogue) {
+    closeDialogue.addEventListener("click", (event) => {
+      event.stopPropagation();
+      hideDialogue();
+    });
+}
 
-// Initialize
 window.addEventListener("DOMContentLoaded", loadScenes);

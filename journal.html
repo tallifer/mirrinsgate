@@ -6,62 +6,37 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <title>Mirrin's Gate Journal</title>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <link rel="stylesheet" href="header.css"> <style>
+  <link rel="stylesheet" href="assets/css/header.css">
+
+  <style>
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background: url('images/background.png') repeat;
+      background: url('assets/images/background.png') repeat;
       background-size: cover;
       background-attachment: fixed;
       background-position: top center;
       color: #3a2a18;
     }
-
-    /* === JOURNAL LAYOUT === */
     #sidebar {
       position: fixed;
-      top: 120px; /* Room for header + some spacing */
+      top: 120px;
       left: 20px;
       width: 250px;
-      bottom: 20px; /* Extend to near the bottom of the page */
+      bottom: 20px;
       background: rgba(255, 248, 230, 0.95);
       border: 2px solid #b28c5b;
       border-radius: 10px;
       padding: 20px;
       box-sizing: border-box;
-      overflow-y: auto; /* Scroll inside the sidebar */
+      overflow-y: auto;
     }
-
-    #sidebar h2 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    #sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    #sidebar li {
-      margin: 10px 0;
-    }
-
-    #sidebar a {
-      text-decoration: none;
-      color: #3a2a18;
-    }
-
-    #sidebar a:hover {
-      text-decoration: underline;
-    }
-
-    /* Main content scrolls */
-    #content {
-      margin-left: 300px; /* room for sidebar */
-      margin-top: 120px;  /* room for header */
-    }
-
+    #sidebar h2 { font-size: 1.2rem; margin-bottom: 10px; }
+    #sidebar ul { list-style: none; padding: 0; margin: 0; }
+    #sidebar li { margin: 10px 0; }
+    #sidebar a { text-decoration: none; color: #3a2a18; }
+    #sidebar a:hover { text-decoration: underline; }
+    #content { margin-left: 300px; margin-top: 120px; }
     .post {
       background: rgba(255, 248, 230, 0.9);
       border: 2px solid #b28c5b;
@@ -70,93 +45,31 @@
       max-width: 800px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      scroll-margin-top: 140px; /* avoids header overlap when linking */
+      scroll-margin-top: 140px;
     }
-
-    .post img {
-      max-width: 100%;
-      margin: 15px 0;
-      border-radius: 8px;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    .post img { max-width: 100%; margin: 15px 0; border-radius: 8px; }
+    html { scroll-behavior: smooth; }
   </style>
 </head>
 <body>
   <div id="header-container"></div>
-
   <div class="journal-container">
     <div id="sidebar">
       <h2>Posts</h2>
       <ul id="postList"></ul>
     </div>
-
     <div id="content">
       <div id="posts"></div>
     </div>
   </div>
 
+  <script src="js/journal.js"></script>
   <script>
-    // Load header dynamically
     fetch('header.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('header-container').innerHTML = html;
-        // The script from header.html will execute automatically
       });
-
-    async function fetchMarkdown(post) {
-      if (post.markdown) {
-        return Array.isArray(post.markdown)
-          ? post.markdown.join("\n\n")
-          : post.markdown;
-      }
-
-      if (post.markdownFile) {
-        const res = await fetch(post.markdownFile);
-        if (!res.ok) throw new Error(`Failed to fetch ${post.markdownFile}`);
-        return await res.text();
-      }
-
-      return "*No content available*";
-    }
-
-    async function loadPosts() {
-      try {
-        const response = await fetch('journal_data/posts.json');
-        const posts = await response.json();
-        const postsContainer = document.getElementById('posts');
-        const postList = document.getElementById('postList');
-
-        for (let index = 0; index < posts.length; index++) {
-          const post = posts[index];
-          const markdownText = await fetchMarkdown(post);
-
-          const div = document.createElement('div');
-          div.className = 'post';
-          div.id = `post-${index}`;
-
-          let content = `<h2>${post.title}</h2>`;
-          if (post.image) {
-            content += `<img src="${post.image}" alt="${post.title}">`;
-          }
-          content += `<div>${marked.parse(markdownText)}</div>`;
-          div.innerHTML = content;
-          postsContainer.appendChild(div);
-
-          const li = document.createElement('li');
-          li.innerHTML = `<a href="#post-${index}">${index + 1}. ${post.title}</a>`;
-          postList.appendChild(li);
-        }
-      } catch (err) {
-        console.error('Failed to load posts:', err);
-      }
-    }
-
-    loadPosts();
   </script>
-
 </body>
 </html>

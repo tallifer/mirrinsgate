@@ -1,11 +1,11 @@
-/* header.css */
+/* assets/css/header.css */
 .header-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 65px;
-  background: url('icons/header_bar.webp') repeat-x center center;
+  background: url('../images/icons/header_bar.webp') repeat-x center center;
   background-size: auto 100%;
   display: flex;
   align-items: center;
