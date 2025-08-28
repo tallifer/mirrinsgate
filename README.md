@@ -3,7 +3,7 @@
 This document will get you up to speed on how the project is organised and how you can start adding your own content.
 
 ## Directory Structure
-The project is organized to keep things clean and predictable. Here’s a map of the key areas:
+The project is organised to keep things clean and predictable. Here’s a map of the key areas:
 
 ```
 /mirrins-gate/
@@ -39,14 +39,14 @@ Adding a new journal entry is a three-step process that involves adding the imag
 1. Place the image for your journal entry into the `data/journal/images/` folder. (e.g., `data/journal/images/AncientAmulet.webp`).
 
 ### Step 2: Write the Journal Content
-1. Create a new Markdown file (`.md`) inside the `data/journal/posts/` folder. The name should be simple and descriptive (e.g., `AncientAmulet.md`).
+1. Create a new Markdown file (`.md`) inside the `data/journal/posts/` folder.
 
-2. Write your journal entry in this file using Markdown for formatting (e.g., `#` for titles, `*` for italics).
+2. Write your journal entry in this file using Markdown for formatting.
 
 ### Step 3: Add the Entry to posts.json
 1. Open the `data/journal/posts.json` file. This is an array that lists all the journal entries.
 
-2. Add a new object to the array for your new entry. This object needs three things:
+2. Add a new object to the array for your new entry. This object needs four things:
    * `"title"`: The title of your journal entry.
    * `"chapter"`: The name of the chapter this entry belongs to. If the chapter doesn't exist, a new collapsible group will be created for it in the sidebar.
    * `"image"`: The path to the image you added in Step 1.
@@ -80,7 +80,7 @@ The journal page will automatically pick up the new entry and display it.
 Adding a new explorable area to the town (like a shop, a house, or a hidden alley) is a two-step process.
 
 ### Step 1: Add the Scene's Image
-1. Get the image you want to use for the new scene. Make sure it's a `.webp` file for better performance.
+1. Get the image you want to use for the new scene. Make sure it's a `.webp` file for better performance. Squoosh.app is a good image converter.
 
 2. Place the image inside the `assets/images/` folder. For example, let's say you add `assets/images/AlchemistsShop.webp`.
 
@@ -127,4 +127,6 @@ Now, open the `data/scenes.json` file. This is where the magic happens. You'll a
 ```
 That's it! The game will automatically handle the rest.
 
-That's all you need to know to start expanding the world. Have fun creating!
+That's all you need to know to start expanding the world.
+
+See you in the tavern!
