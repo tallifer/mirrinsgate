@@ -1,123 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mirrin's Gate</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  
-  <!-- Header Bar -->
-  <header class="header-bar">
-    <div class="header-content">
-      <!-- Left Icons -->
-      <div class="header-icons left">
-        <button class="icon-button" onclick="window.location.href='index.html'">
-          <img src="icons/icon_back.webp" alt="Back">
-        </button>
-      </div>
-
-      <!-- Title -->
-      <h1 class="header-title">Mirrin's Gate</h1>
-
-      <!-- Right Icons -->
-      <div class="header-icons right">
-        <button class="icon-button" onclick="window.location.href='town.html'">
-          <img src="icons/icon_town.webp" alt="Town">
-        </button>
-        <button class="icon-button" onclick="window.location.href='world.html'">
-          <img src="icons/icon_world.webp" alt="World Map">
-        </button>
-        <button class="icon-button" onclick="window.location.href='journal.html'">
-          <img src="icons/icon_journal.webp" alt="Journal">
-        </button>
-        <button class="icon-button">
-          <img id="musicToggle" src="icons/icon_unmute.webp" alt="Toggle Music">
-        </button>
-      </div>
-
+<header class="header-bar">
+  <div class="header-content">
+    <div class="header-icons left">
+      <button class="icon-button" onclick="window.location.href='index.html'">
+        <img src="icons/icon_back.webp" alt="Back">
+      </button>
     </div>
-  </header>
 
-  <script>
-    // Music toggle demo
-    const musicButton = document.getElementById('musicToggle');
+    <h1 class="header-title">Mirrin's Gate</h1>
+
+    <div class="header-icons right">
+      <button class="icon-button" onclick="window.location.href='town.html'">
+        <img src="icons/icon_town.webp" alt="Town">
+      </button>
+      <button class="icon-button" onclick="window.location.href='world.html'">
+        <img src="icons/icon_world.webp" alt="World Map">
+      </button>
+      <button class="icon-button" onclick="window.location.href='journal.html'">
+        <img src="icons/icon_journal.webp" alt="Journal">
+      </button>
+      <button class="icon-button" id="musicToggleButton">
+        <img id="musicToggleIcon" src="icons/icon_unmute.webp" alt="Toggle Music">
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Music toggle logic
+  const musicButton = document.getElementById('musicToggleButton');
+  if (musicButton) {
     let musicOn = true;
-
     musicButton.addEventListener('click', () => {
       musicOn = !musicOn;
-      musicButton.src = musicOn ? 'icons/icon_unmute.webp' : 'icons/icon_mute.webp';
-      // Here you would also toggle your game's audio
+      const icon = document.getElementById('musicToggleIcon');
+      if (icon) {
+        icon.src = musicOn ? 'icons/icon_unmute.webp' : 'icons/icon_mute.webp';
+      }
+      // You would also toggle your game's audio here
     });
-  </script>
-
-<style>
-  body {
-    margin: 0;
-    font-family: 'Georgia', serif;
-    /*background: url('images/background.png') repeat;*/
   }
-
-  /* Header bar styling */
-  .header-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65px; /* height of header */
-    background: url('icons/header_bar.webp') repeat-x center center;
-    background-size: auto 100%; /* makes image height match the header */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-
-  /* Centered content within the bar */
-  .header-content {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-    box-sizing: border-box;
-  }
-
-  /* Title in the center */
-  .header-title {
-    font-size: 2rem;
-    color: #3a2a18;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-    margin: 0;
-  }
-
-  /* Icon buttons */
-  .icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin: 0 5px;
-  }
-
-  .icon-button img {
-    height: 52px; /* Size your icon */
-    width: 52px;
-    transition: transform 0.2s ease;
-  }
-
-  .icon-button img:hover {
-    transform: scale(1.1);
-  }
-
-  .header-icons.left,
-  .header-icons.right {
-    display: flex;
-    align-items: center;
-  }
-  </style>
-
-  
-</body>
-</html>
+</script>

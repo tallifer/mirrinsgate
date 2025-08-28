@@ -4,16 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mirrin's Gate - World</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="loader.css"> <!-- Shared loader CSS -->
+  <link rel="stylesheet" href="loader.css">
+  <link rel="stylesheet" href="header.css"> <!-- Added shared header CSS -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <style>
+    /* --- MODIFIED --- */
     body {
       margin: 0;
       background: url('images/background.webp') repeat;
       background-size: cover;
       font-family: 'Georgia', serif;
       overflow: hidden;
+      /* Added flex properties to center the content */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
     #header-container {
@@ -25,10 +31,10 @@
     #borderWrapper {
         visibility: hidden; /* Hide until preload completes */
         position: relative;
-        display: inline-block;
+        /* display: inline-block;  <-- No longer needed */
         width: 975px;   /* full border image size */
         height: 670px;  /* full border image size */
-        margin-top: 50px; /* Add some space below header */
+        margin-top: 65px; /* Adjust margin to account for header height */
     }
 
     /* Border */
@@ -84,19 +90,19 @@
   <div id="header-container"></div>
 
   <div id="borderWrapper">
-  <img id="mapBorder" src="images/border.webp" alt="Map Border">
-
-  <!-- Map Container (exactly 900x600 inside) -->
-  <div id="mapContainer">
-    <img id="worldMap" src="https://github.com/SamHSoftware/Miscellaneous/blob/master/MirrinsGate/MirrinsGate_S2.jpg?raw=true" alt="World Map">
+    <img id="mapBorder" src="images/border.webp" alt="Map Border">
+    <div id="mapContainer">
+      <img id="worldMap" src="https://github.com/SamHSoftware/Miscellaneous/blob/master/MirrinsGate/MirrinsGate_S2.jpg?raw=true" alt="World Map">
+    </div>
   </div>
-</div>
 
   <script>
     // Load header dynamically
     fetch('header.html')
       .then(res => res.text())
-      .then(data => document.getElementById('header-container').innerHTML = data);
+      .then(data => {
+        document.getElementById('header-container').innerHTML = data;
+      });
 
     const map = document.getElementById('worldMap');
     const container = document.getElementById('mapContainer');
@@ -113,14 +119,14 @@
 
     function clampPosition() {
       const rect = container.getBoundingClientRect();
-      const mapWidth = rect.width * scale;
-      const mapHeight = rect.height * scale;
+      const mapWidth = map.offsetWidth * scale;
+      const mapHeight = map.offsetHeight * scale;
 
       const maxX = (mapWidth - rect.width) / 2;
       const maxY = (mapHeight - rect.height) / 2;
 
-      posX = Math.min(maxX, Math.max(-maxX, posX));
-      posY = Math.min(maxY, Math.max(-maxY, posY));
+      posX = Math.max(-maxX, Math.min(maxX, posX));
+      posY = Math.max(-maxY, Math.min(maxY, posY));
     }
 
     container.addEventListener('wheel', e => {
@@ -129,12 +135,15 @@
       const oldScale = scale;
       scale = e.deltaY < 0 ? Math.min(scale + zoomIntensity, 3) : Math.max(scale - zoomIntensity, 1);
 
-      // Zoom toward cursor
       const rect = container.getBoundingClientRect();
-      const offsetX = e.clientX - rect.left - rect.width / 2;
-      const offsetY = e.clientY - rect.top - rect.height / 2;
-      posX -= offsetX * (scale - oldScale) / scale;
-      posY -= offsetY * (scale - oldScale) / scale;
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const worldX = (mouseX - rect.width / 2 - posX) / oldScale;
+      const worldY = (mouseY - rect.height / 2 - posY) / oldScale;
+
+      posX = mouseX - rect.width / 2 - worldX * scale;
+      posY = mouseY - rect.height / 2 - worldY * scale;
 
       clampPosition();
       updateTransform();
@@ -144,6 +153,7 @@
       dragging = true;
       startX = e.clientX - posX;
       startY = e.clientY - posY;
+      container.style.cursor = 'grabbing';
     });
 
     window.addEventListener('mousemove', e => {
@@ -154,7 +164,10 @@
       updateTransform();
     });
 
-    window.addEventListener('mouseup', () => dragging = false);
+    window.addEventListener('mouseup', () => {
+      dragging = false;
+      container.style.cursor = 'grab';
+    });
 
     container.addEventListener('dblclick', () => {
       scale = 1;
@@ -163,6 +176,7 @@
       updateTransform();
     });
 
+    // Initial call
     updateTransform();
   </script>
 
@@ -173,7 +187,7 @@
       [
         'images/background.webp',
         'images/border.webp',
-        'images/world_medium.png'
+        'https://github.com/SamHSoftware/Miscellaneous/blob/master/MirrinsGate/MirrinsGate_S2.jpg?raw=true'
       ],
       '#borderWrapper'
     );
