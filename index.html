@@ -5,97 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <title>Mirrin's Gate</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      font-family: 'Georgia', serif;
-      overflow: hidden;
-      background: black;
-    }
-    .landing-container {
-      position: relative;
-      height: 100%;
-      width: 100%;
-    }
-    .landing-container > img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transform: scale(1);
-      animation: slowZoom 35s ease forwards;
-    }
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.25);
-      opacity: 0;
-      animation: fadeIn 3s ease-in-out forwards;
-      animation-delay: 1.5s;
-      pointer-events: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .overlay-button {
-      position: absolute;
-      width: 100px;
-      height: auto;
-      max-width: 10vw;
-      object-fit: contain;
-      pointer-events: auto;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .overlay-button:hover {
-      transform: scale(1.1);
-    }
-    .fade-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      pointer-events: none;
-      opacity: 1;
-      animation: fadeOut 1s ease-in-out forwards;
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    @keyframes slowZoom {
-      to { transform: scale(1.1); }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="landing">
   <div class="landing-container">
-    <img src="assets/images/landing.webp" alt="Mirrin's Gate Landing">
+    <!-- Desktop Image -->
+    <img src="assets/images/landing.webp" alt="Mirrin's Gate" class="landing-image desktop-image">
+    <!-- Mobile Image -->
+    <img src="assets/images/landing-mobile.webp" alt="Mirrin's Gate" class="landing-image mobile-image">
+    
     <div class="overlay">
       <img
         src="assets/images/icons/enter.png"
-        alt="Enter the Town"
+        alt="Enter Mirrin's Gate"
         class="overlay-button"
-        onclick="fadeToTown()"
+        id="enterButton"
       >
     </div>
   </div>
-  <div class="fade-overlay" id="fadeOverlay"></div>
-  <script>
-    function fadeToTown() {
-      sessionStorage.setItem('fromIndex', 'true');
-      window.location.href = 'town.html';
-    }
-  </script>
+
+  <script src="js/landing.js"></script>
 </body>
 </html>
+
