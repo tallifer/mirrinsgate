@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <title>Mirrin's Gate</title>
-  <!-- Link to the central stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="landing">
   <div class="landing-container">
-    <img src="assets/images/landing.webp" alt="Mirrin's Gate Landing">
+    <!-- Desktop Image -->
+    <img src="assets/images/landing.webp" alt="Mirrin's Gate" class="landing-image desktop-image">
+    <!-- Mobile Image -->
+    <img src="assets/images/landing-mobile.webp" alt="Mirrin's Gate" class="landing-image mobile-image">
+    
     <div class="overlay">
       <img
         src="assets/images/icons/enter.png"
@@ -21,21 +24,7 @@
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const enterButton = document.getElementById('enterButton');
-      const isMobile = window.innerWidth <= 768;
-
-      if (isMobile) {
-        enterButton.onclick = () => { window.location.href = 'journal.html'; };
-      } else {
-        enterButton.onclick = () => {
-          sessionStorage.setItem('fromIndex', 'true');
-          window.location.href = 'town.html';
-        };
-      }
-    });
-  </script>
+  <script src="js/landing.js"></script>
 </body>
 </html>
 
