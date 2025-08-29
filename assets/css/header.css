@@ -34,7 +34,6 @@
   transform: translate(-50%, -50%);
   color: #2a1a0a;
   text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.1), -1px -1px 0px rgba(0, 0, 0, 0.5);
-  /* --- NEW: Prevents title from wrapping --- */
   white-space: nowrap;
 }
 
@@ -64,23 +63,32 @@
 }
 
 /* --- MOBILE & DESKTOP VISIBILITY --- */
-
-/* Hide mobile button by default on larger screens */
 .mobile-menu-container {
   display: none;
 }
 
 @media (max-width: 768px) {
-  /* On mobile, hide the desktop icon groups */
   .header-icons.left,
   .header-icons.right {
     display: none;
   }
 
-  /* And show the single mobile menu button */
   .mobile-menu-container {
     display: block;
-    /* --- NEW: Pushes the mobile button to the far right --- */
     margin-left: auto;
   }
+
+  .header-content {
+    padding: 0 0 /* Reduce side padding on mobile */
+  }
+
+  .header-title {
+    font-size: 1.8rem; /* Make the title smaller on mobile */
+  }
+
+  .mobile-menu-container .icon-button img {
+    height: 48px; /* Smaller icon on mobile */
+    width: 48px;
+  }
 }
+
