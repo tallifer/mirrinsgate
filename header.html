@@ -1,7 +1,15 @@
-<!-- header.html -->
+<!-- assets/header.html -->
 <header class="header-bar">
   <div class="header-content">
-    <!-- Left Icons -->
+
+    <!-- Mobile-only Menu Button -->
+    <div class="mobile-menu-container">
+      <button class="icon-button" id="mobileMenuButton">
+        <img src="assets/images/icons/icon_journal.webp" alt="Menu">
+      </button>
+    </div>
+
+    <!-- Desktop: Left Icons -->
     <div class="header-icons left">
       <button class="icon-button" onclick="window.location.href='index.html'">
         <img src="assets/images/icons/icon_back.webp" alt="Back">
@@ -11,7 +19,7 @@
     <!-- Title -->
     <h1 class="header-title">Mirrin's Gate</h1>
 
-    <!-- Right Icons -->
+    <!-- Desktop: Right Icons -->
     <div class="header-icons right">
       <button class="icon-button" onclick="window.location.href='town.html'">
         <img src="assets/images/icons/icon_town.webp" alt="Town">
@@ -30,7 +38,7 @@
 </header>
 
 <script>
-  // This script will run when the header is injected into a page
+  // This script remains for the music toggle functionality
   const musicButton = document.getElementById('musicToggleButton');
   if (musicButton) {
     let musicOn = true;
@@ -40,7 +48,6 @@
       if (icon) {
         icon.src = musicOn ? 'assets/images/icons/icon_unmute.webp' : 'assets/images/icons/icon_mute.webp';
       }
-      // You would also toggle your game's audio here
     });
   }
 </script>
